@@ -50,7 +50,7 @@ Compares Poland with the EU-27 average over time using dynamic KPIs, trend analy
 
 Benchmarks Poland against other EU member states and identifies neighbouring countries and similar performers.
 
-<img width="1154" height="651" alt="ranking_GHG_emissions" src="https://github.com/user-attachments/assets/988194af-e0d7-4ebe-acb0-4ef0e6b741c1" />
+<img width="1150" height="647" alt="dashboard_ranking" src="https://github.com/user-attachments/assets/bc9a6f13-6837-4c28-a4a7-379f2ce28c51" />
 
 ---
 
