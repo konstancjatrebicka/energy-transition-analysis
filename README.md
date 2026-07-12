@@ -18,7 +18,7 @@ The project transforms raw Eurostat data into an interactive Power BI dashboard 
 
 ### Quick Links
 
-* **Live Dashboard:** [Open the interactive report](https://app.powerbi.com/viewr=eyJrIjoiNDI2YWU4YmItNjAyYy00NGI5LTlkYTMtYTUyYmU5NTgxNjQ0IiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9)
+* **Live Dashboard:** [Open the interactive report](https://app.powerbi.com/view?r=eyJrIjoiNDI2YWU4YmItNjAyYy00NGI5LTlkYTMtYTUyYmU5NTgxNjQ0IiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9)
 * **Power BI Report:** [Download the PBIX file](PowerBI/Energy_Transition.pbix)
 * **SQL Scripts:** [View SQL scripts](SQL/)
 * **DAX Measures:** [View DAX measures](PowerBI/measures_energy_transition.txt)
