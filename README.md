@@ -18,10 +18,10 @@ The project transforms raw Eurostat data into an interactive Power BI dashboard 
 
 ### Quick Links
 
-* **Live Dashboard:** [Open the interactive report](https://app.powerbi.com/viewr=eyJrIjoiNDI2YWU4YmItNjAyYy00NGI5LTlkYTMtYTUyYmU5NTgxNjQ0IiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9)
+* **Live Dashboard:** [Open the interactive report](https://app.powerbi.com/view?r=eyJrIjoiNDI2YWU4YmItNjAyYy00NGI5LTlkYTMtYTUyYmU5NTgxNjQ0IiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9)
 * **Power BI Report:** [Download the PBIX file](PowerBI/Energy_Transition.pbix)
 * **SQL Scripts:** [View SQL scripts](SQL/)
-* **DAX Measures:** [View DAX measures](PowerBI/measures_energy_transition.csv)
+* **DAX Measures:** [View DAX measures](PowerBI/measures_energy_transition.txt)
   
 ---
 
@@ -50,7 +50,7 @@ Compares Poland with the EU-27 average over time using dynamic KPIs, trend analy
 
 Benchmarks Poland against other EU member states and identifies neighbouring countries and similar performers.
 
-<img width="1154" height="651" alt="ranking_GHG_emissions" src="https://github.com/user-attachments/assets/988194af-e0d7-4ebe-acb0-4ef0e6b741c1" />
+<img width="1150" height="647" alt="dashboard_ranking" src="https://github.com/user-attachments/assets/bc9a6f13-6837-4c28-a4a7-379f2ce28c51" />
 
 ---
 
@@ -163,7 +163,7 @@ energy-transition-analysis/
 │
 ├── PowerBI/
 │   ├── Energy_Transition.pbix
-│   └── measures_energy_transition.csv
+│   └── measures_energy_transition.txt
 │
 └── Images/
     ├── dashboard_overview.png
@@ -185,11 +185,3 @@ energy-transition-analysis/
 **Konstancja Trębicka**
 
 Data Analytics | SQL | Power BI
-
----
-
-## Licence
-
-This project was created for educational and portfolio purposes.
-
-The source datasets are provided by Eurostat under their respective terms of use.
