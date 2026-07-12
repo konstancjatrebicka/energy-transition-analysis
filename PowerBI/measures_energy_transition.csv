@@ -1,0 +1,508 @@
+ID;TableID;Name;Description;DataType;Expression;FormatString;IsHidden;State;ModifiedTime;StructureModifiedTime;KPIID;IsSimpleMeasure;ErrorMessage;DisplayFolder;DetailRowsDefinitionID;DataCategory;LineageTag;SourceLineageTag
+402;12;"EU-27";"";8;"CALCULATE(AVERAGE(fact_indicator_value[value]), dim_country[is_eu27] = 1, dim_country[is_aggregate] = 0)";"";False;1;2026-07-10 17:07:36,043;2026-07-07 15:06:59,846;;False;"";"";;"";"c347b63f-2a17-4294-b0d2-924194aac8e8";""
+406;12;"Poland";"";8;"CALCULATE(AVERAGE(fact_indicator_value[value]), dim_country[country_code] = ""PL"")";"";False;1;2026-07-10 17:07:48,776;2026-07-07 15:14:56,356;;False;"";"";;"";"46015ce3-ad46-4c8e-84ac-9c4b12afec96";""
+409;12;"Gap PL vs UE";"";8;"[Poland] - [EU-27]";"";False;1;2026-07-10 17:19:03,543;2026-07-07 15:16:00,223;;False;"";"";;"";"0d4e90a9-d345-4b4d-977c-39063932ea5d";""
+535;12;"Unit";"";2;"
+    VAR Kod = SELECTEDVALUE(fact_indicator_value[indicator_code])
+RETURN
+SWITCH(
+    Kod,
+    ""GHG_PC"", ""t CO₂e per capita"",
+    ""REN_SHARE"", ""%"",
+    BLANK()
+)";"";False;1;2026-07-10 18:06:48,246;2026-07-08 14:58:41,876;;False;"";"";;"";"c42c2e3e-7302-471f-8df1-ecd562ce838e";""
+537;12;"Direction";"";2;"
+ VAR Kod = SELECTEDVALUE(fact_indicator_value[indicator_code])
+RETURN
+SWITCH(
+    Kod,
+    ""GHG_PC"", ""lower value = better"",
+    ""REN_SHARE"", ""higher value = better"",
+    BLANK()
+)";"";False;1;2026-07-10 16:54:20,366;2026-07-08 15:10:05,903;;False;"";"";;"";"5a942b32-b40b-4ec2-9a1c-c741dd5926c8";""
+539;12;"Indicator Subtitle";"";2;"
+VAR RawIndicator =
+    SELECTEDVALUE(
+        fact_indicator_value[indicator_label],
+        ""select indicator""
+    )
+VAR Indicator = 
+    SUBSTITUTE(RawIndicator, """""""", """")
+VAR Unit =
+    [Unit]
+VAR Direction =
+    [Direction]
+RETURN
+""Selected indicator: "" & Indicator
+    & "" | Unit: "" & Unit
+    & "" | "" & Direction";"";False;1;2026-07-10 18:07:26,273;2026-07-08 15:49:20,066;;False;"";"";;"";"3d1c2929-f0d2-4e8e-8bbe-385222ddec23";""
+545;12;"Gap Value";"";2;"
+VAR Gap = [Gap PL vs UE]
+VAR GapMetric =
+    SWITCH(
+        SELECTEDVALUE(fact_indicator_value[indicator_code]),
+        ""REN_SHARE"", ""p.p."",
+        ""GHG_PC"", ""t/os."",
+        """"
+    )
+RETURN
+FORMAT(Gap, ""+0.00;-0.00;0.00"") & "" "" & GapMetric";"";False;1;2026-07-10 17:19:49,873;2026-07-08 16:21:05,046;;False;"";"";;"";"15378bb5-42f5-4531-980d-eccc16a8a90f";""
+551;12;"Gap Describtion";"";2;"
+VAR Gap = [Gap PL vs UE]
+RETURN
+SWITCH(
+    TRUE(),
+    Gap > 0, ""Poland above EU-27 average"",
+    Gap < 0, ""Poland below EU-27 average"",
+    ""Poland at EU-27 average level""
+)";"";False;1;2026-07-10 17:19:03,550;2026-07-08 16:22:04,006;;False;"";"";;"";"dc5ff2ba-fdb8-4287-9b11-ece99ffc8655";""
+555;12;"Chart Title";"";2;"
+VAR RawIndicator =
+    SELECTEDVALUE (
+        fact_indicator_value[indicator_label],
+        ""select indicator""
+    )
+VAR Indicator =
+    SUBSTITUTE ( RawIndicator, """""""", """" )
+RETURN
+    SWITCH (
+        TRUE (),
+        CONTAINSSTRING (Indicator, ""GHG"" ) || CONTAINSSTRING (Indicator, ""Emissions"" ),
+            ""GHG emissions per capita: Poland vs EU-27 (2013-2024)"",
+
+        CONTAINSSTRING (Indicator, ""Renewable"" ) || CONTAINSSTRING (Indicator, ""Energy"" ),
+            ""Renewable energy share: Poland vs EU-27 (2013-2024)"",
+
+        ""Poland vs EU-27 (2013-2024)""
+    )";"";False;1;2026-07-10 18:10:20,500;2026-07-08 17:07:57,076;;False;"";"";;"";"d231b245-2985-41b7-a13e-3740af6fd66b";""
+611;12;"Distance from Poland";"";8;"
+ABS(
+    AVERAGE(fact_indicator_value[value])
+    -
+    CALCULATE(
+        AVERAGE(fact_indicator_value[value]),
+        dim_country[country_code] = ""PL"",
+        REMOVEFILTERS(dim_country)
+    )
+)";"";False;1;2026-07-10 17:17:18,426;2026-07-08 18:15:14,823;;False;"";"";;"";"d692e5e6-1689-4f5c-85f8-d71675e8e974";""
+614;12;"Similarity to Poland";"";8;"- [Distance from Poland]";"";False;1;2026-07-10 17:20:05,843;2026-07-08 18:33:51,233;;False;"";"";;"";"30a22a66-732c-489b-9022-b67db2d6afda";""
+617;12;"Poland 2013";"";8;"
+CALCULATE(
+    [Poland],
+    fact_indicator_value[year] = 2013
+)";"";False;1;2026-07-10 17:20:17,466;2026-07-09 08:40:05,273;;False;"";"";;"";"acb1efed-fe7b-4465-817b-79ce35b3e2ec";""
+620;12;"EU 2013";"";8;"
+CALCULATE(
+    [EU-27],
+    fact_indicator_value[year] = 2013
+)";"";False;1;2026-07-10 17:21:21,096;2026-07-09 08:41:16,360;;False;"";"";;"";"4bfd5186-bf46-4c40-9ebb-bccc8988679d";""
+623;12;"Poland's change 2024 vs 2013";"";8;"
+ROUND(
+    DIVIDE(
+        [Poland 2024] - [Poland 2013],
+        [Poland 2013],
+        0
+    ) * 100,
+    1
+)";"";False;1;2026-07-10 17:20:34,700;2026-07-09 08:42:09,613;;False;"";"";;"";"1820c99f-160e-4a91-a83e-4c3390dfc0a3";""
+628;12;"EU change (2013-2024)";"";8;"
+ROUND(
+    DIVIDE(
+        [EU 2024] - [EU 2013],
+        [EU 2013],
+        0
+    ) * 100,
+    1
+)";"";False;1;2026-07-10 17:21:37,803;2026-07-09 08:44:19,666;;False;"";"";;"";"8c82279b-96d2-4aa3-bd8f-9ffb9cb58fa4";""
+631;12;"Poland 2024";"";8;"
+CALCULATE(
+    [Poland],
+    fact_indicator_value[year] = 2024
+)";"";False;1;2026-07-10 17:20:23,470;2026-07-09 08:49:25,466;;False;"";"";;"";"0c5e1f10-16d8-42eb-9ed0-5653e3ed445f";""
+634;12;"EU 2024";"";8;"
+CALCULATE(
+    [EU-27],
+    fact_indicator_value[year] = 2024
+)";"";False;1;2026-07-10 17:21:37,790;2026-07-09 08:50:11,733;;False;"";"";;"";"ac87f780-da7b-4992-b66d-58410edb93b6";""
+637;12;"KPI HTML";"";2;"
+VAR poland_val = [Poland]
+VAR eu_val = [EU-27]
+VAR gap_val = [Gap PL vs UE]
+VAR poland_change = [Poland's change 2024 vs 2013]
+VAR eu_change = [EU change (2013-2024)]
+VAR metric = [Unit]
+
+VAR gap_metric =
+    IF (
+        metric = ""%"",
+        ""p.p."",
+        metric
+    )
+
+VAR poland_arrow = IF ( poland_change < 0, ""↓"", ""↑"" )
+VAR poland_colour = IF ( poland_change < 0, ""#2E7D32"", ""#C0392B"" )
+
+VAR eu_arrow = IF ( eu_change < 0, ""↓"", ""↑"" )
+VAR eu_colour = IF ( eu_change < 0, ""#2E7D32"", ""#C0392B"" )
+
+VAR gap_arrow = IF ( gap_val > 0, ""↑"", ""↓"" )
+VAR gap_colour = IF ( gap_val > 0, ""#C0392B"", ""#2E7D32"" )
+VAR gap_description = IF ( gap_val > 0, ""Poland above EU"", ""Poland below EU"" )
+
+VAR poland_change_fmt =
+    FORMAT ( ABS ( poland_change ), ""0.0"", ""en-US"" ) & ""%""
+
+VAR eu_change_fmt =
+    FORMAT ( ABS ( eu_change ), ""0.0"", ""en-US"" ) & ""%""
+
+VAR poland_val_fmt =
+    FORMAT ( poland_val, ""0.00"", ""en-US"" ) & "" "" & metric
+
+VAR eu_val_fmt =
+    FORMAT ( eu_val, ""0.00"", ""en-US"" ) & "" "" & metric
+
+VAR gap_val_fmt =
+    IF ( gap_val > 0, ""+"", """" )
+        & FORMAT ( gap_val, ""0.00"", ""en-US"" )
+        & "" ""
+        & gap_metric
+
+RETURN
+""
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Trebuchet MS', sans-serif; }
+  body { background: transparent; padding: 6px; }
+
+  .kpi-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .kpi-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 14px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    border-top: 3px solid #2E7D32;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .kpi-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .kpi-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1C2B1E;
+    line-height: 1.1;
+  }
+
+  .kpi-divider {
+    width: 100%;
+    height: 1px;
+    background: #F3F4F6;
+    margin: 3px 0;
+  }
+
+  .kpi-change {
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .kpi-change-label {
+    font-size: 10px;
+    color: #9CA3AF;
+    margin-top: 1px;
+  }
+</style>
+
+<body>
+<div class='kpi-row'>
+
+  <div class='kpi-card'>
+    <div class='kpi-label'>Poland</div>
+    <div class='kpi-value'>"" & poland_val_fmt & ""</div>
+    <div class='kpi-divider'></div>
+    <div class='kpi-change' style='color:"" & poland_colour & ""'>
+      <span style='font-size:15px'>"" & poland_arrow & ""</span>
+      <span>"" & poland_change_fmt & "" vs 2013</span>
+    </div>
+    <div class='kpi-change-label'>change since 2013</div>
+  </div>
+
+  <div class='kpi-card'>
+    <div class='kpi-label'>EU-27 Average</div>
+    <div class='kpi-value'>"" & eu_val_fmt & ""</div>
+    <div class='kpi-divider'></div>
+    <div class='kpi-change' style='color:"" & eu_colour & ""'>
+      <span style='font-size:15px'>"" & eu_arrow & ""</span>
+      <span>"" & eu_change_fmt & "" vs 2013</span>
+    </div>
+    <div class='kpi-change-label'>change since 2013</div>
+  </div>
+
+  <div class='kpi-card'>
+    <div class='kpi-label'>Gap: Poland vs EU</div>
+    <div class='kpi-value'>"" & gap_val_fmt & ""</div>
+    <div class='kpi-divider'></div>
+    <div class='kpi-change' style='color:"" & gap_colour & ""'>
+      <span style='font-size:15px'>"" & gap_arrow & ""</span>
+      <span>"" & gap_description & ""</span>
+    </div>
+    <div class='kpi-change-label'>distance to EU average</div>
+  </div>
+
+</div>
+</body>
+""";"";False;1;2026-07-10 18:42:12,303;2026-07-09 09:17:26,540;;False;"";"";;"";"cee7b0be-27ea-43eb-aa6e-a972be95f4e9";""
+639;12;"Key Insights HTML";"";2;"
+VAR indicator = SELECTEDVALUE(fact_indicator_value[indicator_code])
+
+VAR text_ghg =
+    ""<div class='insights'>
+      <div class='insights-title'>Key Observations - GHG Emissions</div>
+      <div class='insight-item'><span class='num'>1.</span><span>Poland remained <strong>above the EU-27 average</strong> in GHG emissions per capita throughout 2013-2024.</span></div>
+      <div class='insight-item'><span class='num'>2.</span><span>The EU decarbonises <strong>faster than Poland</strong> - EU average fell by 25.6% compared to 2013, Poland by only 9.7%.</span></div>
+      <div class='insight-item'><span class='num'>3.</span><span>Poland improved in absolute terms, but its gap to the EU-27 average <strong>widened</strong>.</span></div>
+    </div>""
+    
+VAR text_res =
+    ""<div class='insights'>
+      <div class='insights-title'>Key Observations - Renewable Energy</div>
+      <div class='insight-item'><span class='num'>1.</span><span>Poland remained <strong>below the EU-27 average</strong> in renewable energy share - the 2024 gap was -8.68 p.p.</span></div>
+      <div class='insight-item'><span class='num'>2.</span><span>Poland's renewable share is growing (+55% vs 2013), but its <strong>EU ranking is falling</strong> (from 20th to 23rd place).</span></div>
+      <div class='insight-item'><span class='num'>3.</span><span>Other EU countries accelerated faster - Poland improves, but the <strong>distance to OZE leaders is widening</strong>.</span></div>
+    </div>""
+
+RETURN
+""<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Trebuchet MS', sans-serif; }
+  body { background: transparent; padding: 4px; height: 100%; }
+  .insights {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    border-left: 4px solid #2E7D32;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .insights-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2E7D32;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  .insight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.5;
+  }
+  .num {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2E7D32;
+    flex-shrink: 0;
+    min-width: 16px;
+  }
+  strong { color: #1C2B1E; font-weight: 700; }
+</style>
+<body>"" &
+IF(indicator = ""GHG_PC"", text_ghg, text_res) &
+""</body>""";"";False;1;2026-07-10 18:20:21,316;2026-07-09 09:42:20,866;;False;"";"";;"";"a5b2f886-31f8-4b15-b7fa-a7c7e19626ab";""
+641;12;"Rank Poland";"";6;"
+RANKX(
+    FILTER(
+        ALL(dim_country),
+        dim_country[is_eu27] = 1 && dim_country[is_aggregate] = 0
+    ),
+    CALCULATE(AVERAGE(fact_indicator_value[value])),
+    ,
+    ASC,
+    Dense
+)";"0";False;1;2026-07-10 17:20:47,416;2026-07-09 10:16:22,283;;False;"";"";;"";"4103c59a-264c-482b-b733-eb2f6f151a83";""
+643;12;"Rank_Poland_dynamic";"";6;"
+CALCULATE(
+    RANKX(
+        FILTER(
+            ALL(dim_country),
+            dim_country[is_eu27] = 1 && dim_country[is_aggregate] = 0
+        ),
+        CALCULATE(AVERAGE(fact_indicator_value[value])),
+        ,
+        ASC,
+        DENSE
+    ),
+    dim_country[country_code] = ""PL""
+)";"0";False;1;2026-07-10 17:21:09,796;2026-07-09 10:18:24,283;;False;"";"";;"";"7e31cb97-105b-4d19-a1fa-e33ff356f1e2";""
+645;12;"value to sort";"";8;"
+VAR indicator = SELECTEDVALUE(fact_indicator_value[indicator_code])
+RETURN
+IF(
+    indicator = ""GHG_PC"",
+    -AVERAGE(fact_indicator_value[value]),
+    AVERAGE(fact_indicator_value[value])
+)";"";False;1;2026-07-10 17:16:10,490;2026-07-09 10:47:57,376;;False;"";"";;"";"f761f3e6-85a7-4efe-8ba9-9aa066ada635";""
+648;12;"Rank HTML";"";2;"
+VAR indicator = SELECTEDVALUE(fact_indicator_value[indicator_code])
+VAR rank_val = [Rank_Poland_dynamic]
+VAR rank_dynamic_text = IF(indicator = ""GHG_PC"",
+    FORMAT(rank_val, ""0"") & ""nd lowest GHG emissions per capita in EU-27"",
+    FORMAT(rank_val, ""0"") & ""th lowest renewable energy share in EU-27""
+)
+VAR colour_rank = IF(indicator = ""GHG_PC"",
+    IF(rank_val <= 10, ""#2E7D32"", IF(rank_val <= 20, ""#F39C12"", ""#C0392B"")),
+    IF(rank_val <= 10, ""#C0392B"", IF(rank_val <= 20, ""#F39C12"", ""#2E7D32""))
+)
+
+RETURN
+""<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Trebuchet MS', sans-serif; }
+  body { background: transparent; padding: 4px; height: 100%; }
+  .rank-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    border-left: 4px solid #2E7D32;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .rank-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .rank-number {
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 1;
+    color: "" & colour_rank & "";
+  }
+  .rank-suffix {
+    font-size: 16px;
+    font-weight: 400;
+    color: #6B7280;
+  }
+  .rank-desc {
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.4;
+    border-top: 1px solid #F3F4F6;
+    padding-top: 6px;
+  }
+</style>
+<body>
+<div class='rank-card'>
+  <div class='rank-label'>Poland's Position in EU-27</div>
+  <div class='rank-number'>"" & FORMAT(rank_val, ""0"") & ""<span class='rank-suffix'>/27</span></div>
+  <div class='rank-desc'>"" & rank_dynamic_text & ""</div>
+</div>
+</body>""";"";False;1;2026-07-10 18:11:52,963;2026-07-09 11:12:49,260;;False;"";"";;"";"8b33c896-7d8f-473a-b0cf-1df4629c2ff3";""
+650;12;"Key Insights Ranking HTML";"";2;"
+VAR indicator = SELECTEDVALUE(fact_indicator_value[indicator_code])
+VAR rank_val = [Rank_Poland_dynamic]
+
+VAR text_ghg =
+    ""<div class='insights'>
+      <div class='insights-title'>Key Observations - GHG Ranking</div>
+      <div class='insight-item'><span class='num'>1.</span><span>Poland ranks <strong>"" & FORMAT(rank_val, ""0"") & ""th out of 27</strong> in GHG emissions per capita - among the higher-emitting EU countries.</span></div>
+      <div class='insight-item'><span class='num'>2.</span><span>Countries with the most <strong>similar emission profile</strong>: Netherlands, Germany, Belgium - comparable industrialisation and energy mix.</span></div>
+      <div class='insight-item'><span class='num'>3.</span><span>Lowest-emission countries (Malta, Sweden) achieve their results through <strong>high renewable share or low industrial intensity</strong>.</span></div>
+    </div>""
+
+VAR text_oze =
+    ""<div class='insights'>
+      <div class='insights-title'>Key Observations - Renewable Energy Ranking</div>
+      <div class='insight-item'><span class='num'>1.</span><span>Poland has the <strong>"" & FORMAT(rank_val, ""0"") & ""th lowest</strong> renewable energy share in the EU.</span></div>
+      <div class='insight-item'><span class='num'>2.</span><span>Countries with a similar renewable profile: Cyprus, Slovakia, Hungary - <strong>comparable transition pace</strong> and fossil-fuel-based energy structure.</span></div>
+      <div class='insight-item'><span class='num'>3.</span><span>Renewables leaders (Sweden, Finland, Latvia) exceed <strong>40% renewable share</strong> - Poland’s result is less than half of the leaders’ level.</span></div>
+    </div>""
+
+RETURN
+""<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Trebuchet MS', sans-serif; }
+  body { background: transparent; padding: 4px; height: 100%; }
+  .insights {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    border-left: 4px solid #2E7D32;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .insights-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2E7D32;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  .insight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.5;
+  }
+  .num {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2E7D32;
+    flex-shrink: 0;
+    min-width: 16px;
+  }
+  strong { color: #1C2B1E; font-weight: 700; }
+</style>
+<body>"" &
+IF(indicator = ""GHG_PC"", text_ghg, text_oze) &
+""</body>""";"";False;1;2026-07-10 18:29:13,596;2026-07-09 11:16:38,980;;False;"";"";;"";"1ca914c0-5b98-4f97-be1a-cade15b5fcf3";""
+652;12;"Country Value";"";8;"
+AVERAGE(fact_indicator_value[value])";"";False;1;2026-07-10 18:36:21,360;2026-07-09 11:43:30,180;;False;"";"";;"";"b898326d-8830-4199-8597-c99ebf2284f5";""
+655;12;"Ranking Title";"";2;"
+VAR RawIndicator =
+    SELECTEDVALUE (
+        fact_indicator_value[indicator_label],
+        ""select indicator""
+    )
+VAR Indicator =
+    SUBSTITUTE ( RawIndicator, """""""", """" )
+RETURN
+    SWITCH (
+        TRUE (),
+        CONTAINSSTRING (Indicator, ""GHG"" ) || CONTAINSSTRING (Indicator, ""Emissions"" ),
+            ""EU-27 Country Ranking (↓ lower emissions = better)"",
+
+        CONTAINSSTRING (Indicator, ""Renewable"" ) || CONTAINSSTRING (Indicator, ""Energy"" ),
+            ""EU-27 Country Ranking (↑ higher renewable share = better)"",
+
+        ""EU-27 Country Ranking""
+    )";"";False;1;2026-07-10 17:12:16,486;2026-07-09 14:37:51,933;;False;"";"";;"";"0f5a79d7-cfd5-41a6-86e4-8059dfed2ddb";""
