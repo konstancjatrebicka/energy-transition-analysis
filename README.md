@@ -44,13 +44,13 @@ The dashboard combines historical trends, Poland–EU gap analysis and country b
 
 Compares Poland with the EU-27 average over time using dynamic KPIs, trend analysis and contextual commentary.
 
-<img width="1153" height="648" alt="overview_renewables_shares" src="https://github.com/user-attachments/assets/1c64f12d-3237-4836-9e93-7f5ae4cfb3de" />
+<img width="1153" height="648" alt="overview_renewables_shares" src="https://github.com/user-attachments/assets/5117686b-3c29-4aac-9b62-4c5326e1a480" />
 
 ### Country Ranking
 
 Benchmarks Poland against other EU member states and identifies neighbouring countries and similar performers.
 
-<img width="1154" height="651" alt="ranking_GHG_emissions" src="https://github.com/user-attachments/assets/33b421c9-377a-48d7-ad2a-adcfc5666d1c" />
+<img width="1154" height="651" alt="ranking_GHG_emissions" src="https://github.com/user-attachments/assets/988194af-e0d7-4ebe-acb0-4ef0e6b741c1" />
 
 ---
 
