@@ -19,10 +19,10 @@ The project transforms raw Eurostat data into an interactive Power BI dashboard 
 ### Links
 
 * **Live Dashboard:** (https://app.powerbi.com/viewr=eyJrIjoiNDI2YWU4YmItNjAyYy00NGI5LTlkYTMtYTUyYmU5NTgxNjQ0IiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9)
-* **Power BI Report:** `PowerBI/Energy_Transition.pbix`
-* **SQL Scripts:** `SQL/`
-* **DAX Measures:** `PowerBI/measures_energy_transition.csv`
-
+* **Power BI Report:** [Download the PBIX file](PowerBI/Energy_Transition.pbix)
+* **SQL Scripts:** [View SQL scripts](SQL/)
+* **DAX Measures:** [View DAX measures](PowerBI/measures_energy_transition.csv)
+  
 ---
 
 ## Business Question
@@ -31,8 +31,8 @@ The project transforms raw Eurostat data into an interactive Power BI dashboard 
 
 The analysis focuses on two complementary indicators:
 
-* **Greenhouse gas emissions per capita** — environmental impact
-* **Renewable energy share** — progress towards cleaner energy
+* **Greenhouse gas emissions per capita** - environmental impact
+* **Renewable energy share** - progress towards cleaner energy
 
 The dashboard combines historical trends, Poland–EU gap analysis and country benchmarking.
 
@@ -99,8 +99,8 @@ The SQL pipeline includes:
 
 The model follows a star-schema approach:
 
-* `fact_indicator_value` — annual observations by country and indicator,
-* `dim_country` — country names, codes and classification attributes.
+* `fact_indicator_value` - annual observations by country and indicator,
+* `dim_country` - country names, codes and classification attributes.
 
 Exploratory SQL queries use CTEs and window functions such as `LAG()` and `RANK()` to validate trends, year-over-year changes and country rankings.
 
@@ -186,7 +186,7 @@ Energy-Transition-Analysis/
 
 **Konstancja Trębicka**
 
-Data Analytics | SQL | Power BI | LinkedIn: https://www.linkedin.com/in/konstancja-tr%C4%99bicka/
+Data Analytics | SQL | Power BI
 
 ---
 
