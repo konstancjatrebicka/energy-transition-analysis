@@ -16,9 +16,9 @@ The project transforms raw Eurostat data into an interactive Power BI dashboard 
 | **Visualisation** | Power BI                                                    |
 | **Indicators**    | Greenhouse gas emissions per capita, renewable energy share |
 
-### Links
+### Quick Links
 
-* **Live Dashboard:** (https://app.powerbi.com/viewr=eyJrIjoiNDI2YWU4YmItNjAyYy00NGI5LTlkYTMtYTUyYmU5NTgxNjQ0IiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9)
+* **Live Dashboard:** [Open the interactive report](https://app.powerbi.com/viewr=eyJrIjoiNDI2YWU4YmItNjAyYy00NGI5LTlkYTMtYTUyYmU5NTgxNjQ0IiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9)
 * **Power BI Report:** [Download the PBIX file](PowerBI/Energy_Transition.pbix)
 * **SQL Scripts:** [View SQL scripts](SQL/)
 * **DAX Measures:** [View DAX measures](PowerBI/measures_energy_transition.csv)
@@ -153,7 +153,7 @@ The project highlights an important distinction between **absolute improvement**
 ## Repository Structure
 
 ```text
-Energy-Transition-Analysis/
+energy-transition-analysis/
 │
 ├── README.md
 ├── SQL/
@@ -165,11 +165,9 @@ Energy-Transition-Analysis/
 │   ├── Energy_Transition.pbix
 │   └── measures_energy_transition.csv
 │
-├── Images/
-│   ├── dashboard_overview.png
-│   └── dashboard_ranking.png
-│
-└── LICENSE
+└── Images/
+    ├── dashboard_overview.png
+    └── dashboard_ranking.png
 ```
 
 ---
