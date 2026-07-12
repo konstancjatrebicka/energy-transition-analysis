@@ -185,11 +185,3 @@ energy-transition-analysis/
 **Konstancja Trębicka**
 
 Data Analytics | SQL | Power BI
-
----
-
-## Licence
-
-This project was created for educational and portfolio purposes.
-
-The source datasets are provided by Eurostat under their respective terms of use.
